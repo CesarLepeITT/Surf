@@ -1,0 +1,3 @@
+import test from 'node:test';import assert from 'node:assert/strict';import { workoutForDate, weeklyWorkouts } from '../src/routines.js';
+test('selects Monday full body and weekend pool plans',()=>{assert.equal(workoutForDate(new Date(2026,8,28)).id,'full-body');assert.equal(workoutForDate(new Date(2026,9,3)).id,'pool');assert.equal(workoutForDate(new Date(2026,9,4)).id,'pool-recovery');});
+test('contains the requested three full-body rounds',()=>{const w=weeklyWorkouts[0];assert.equal(w.rounds,3);assert.equal(w.exercises.length,5);assert.equal(w.restBetweenExercises,45);assert.equal(w.restBetweenRounds,60);});
