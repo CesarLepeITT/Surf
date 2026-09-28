@@ -1,6 +1,6 @@
 # Entrena — entrenador personal local
 
-Aplicación web instalable, sin cuentas ni servidor, para guiar la rutina semanal personal. Los datos de sesiones y preferencias se guardan en `localStorage`; funciona sin red una vez instalada gracias al *service worker*.
+Aplicación web instalable, sin cuentas ni servidor, para guiar la rutina semanal personal. La rutina (rutinas, ejercicios y días asignados) se edita desde la pestaña **Editor** y se guarda en `localStorage` junto con las sesiones y preferencias; funciona sin red una vez instalada gracias al *service worker*.
 
 ## Decisión técnica
 
@@ -15,6 +15,18 @@ node --test tests/*.test.js
 ```
 
 Para probar el modo offline, abra la app una vez, use el menú del navegador para instalarla y luego desactive la red. Las notificaciones necesitan permiso del sistema y la pestaña abierta para esta versión web.
+
+El *service worker* consulta la red primero y sólo cae a la caché cuando no hay conexión, así que una recarga siempre trae la versión actual y no hace falta subir nada a mano. Si una app instalada se queda atrás, cierre todas sus pestañas y vuelva a abrirla, o borre los datos del sitio en el navegador.
+
+## Editar la rutina
+
+En la pestaña **Editor**:
+
+- **Rutinas**: crear, renombrar, duplicar y borrar rutinas; reordenar sus ejercicios y ajustar series, repeticiones, duración, descanso y notas de cada uno; añadirlos desde el buscador del catálogo. Un día puede quedar libre (descanso) y la misma rutina puede ocupar varios días. Toca un día de la semana para asignarle o quitarle una rutina.
+- **Ejercicios**: catálogo con buscador por nombre, músculo, equipo o alias. Al borrar un ejercicio en uso se avisa de en qué rutinas aparecerá y se quita de todas ellas.
+- **Restaurar rutina inicial** devuelve el catálogo y la semana a la semilla y descarta los cambios.
+
+Cada cambio se guarda al instante en este dispositivo: no hay nube ni sincronización, y «Exportar historial» sólo cubre las sesiones completadas.
 
 ## Dataset y atribución
 
