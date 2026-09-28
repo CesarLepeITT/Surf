@@ -1,0 +1,2 @@
+const CACHE='entrena-v2';const ASSETS=['/','/index.html','/manifest.webmanifest','/src/app.js','/src/editor.js','/src/models.js','/src/routines.js','/src/storage.js','/src/timer.js','/src/notifications.js','/src/exercise-mapping.js','/src/styles.css'];
+self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS))));self.addEventListener('activate',e=>e.waitUntil(self.clients.claim()));self.addEventListener('fetch',e=>e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request))));
