@@ -1,0 +1,3 @@
+let timeout;
+export async function requestReminderPermission() { if (!('Notification' in window)) return false; return (await Notification.requestPermission()) === 'granted'; }
+export function scheduleBrowserReminder(preferences, workout) { clearTimeout(timeout); if(!preferences.reminders.enabled||!('Notification'in window)||Notification.permission!=='granted'||!preferences.reminders.types[workout.type]) return; const [h,m]=preferences.reminders.time.split(':').map(Number), now=new Date(), at=new Date();at.setHours(h,m,0,0);if(at<=now)at.setDate(at.getDate()+1); timeout=setTimeout(()=>new Notification('Entrenamiento de hoy',{body:`Hoy toca ${workout.name}.${workout.exercises.length?` ${workout.exercises.length} ejercicios · ${workout.rounds} rondas`:''}`}),at-now); }

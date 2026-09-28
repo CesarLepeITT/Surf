@@ -1,0 +1,8 @@
+const KEY='entrena.local.v1';
+export const defaultState = { sessions:[], preferences:{theme:'system',restBetweenExercises:45,restBetweenRounds:60,stretchSeconds:30,reminders:{enabled:false,time:'19:00',types:{fuerza:true,running:true,piscina:true,movilidad:false}}} };
+export const loadState = storage => { try { const saved=JSON.parse(storage.getItem(KEY)); return saved ? {...defaultState,...saved,preferences:{...defaultState.preferences,...saved.preferences}} : structuredClone(defaultState); } catch { return structuredClone(defaultState); } };
+export const saveState = (storage,state) => storage.setItem(KEY,JSON.stringify(state));
+export const addSession = (state,session) => ({...state,sessions:[...state.sessions,session]});
+export const clearHistory = state => ({...state,sessions:[]});
+export const statistics = (sessions, now=new Date()) => { const completed=sessions.filter(s=>s.completedAt); const weekStart=new Date(now); weekStart.setDate(now.getDate()-((now.getDay()+6)%7));weekStart.setHours(0,0,0,0); const month=now.getMonth(),year=now.getFullYear(); const byDate=new Set(completed.map(s=>s.date)); let streak=0,d=new Date(now); while(byDate.has(d.toISOString().slice(0,10))){streak++;d.setDate(d.getDate()-1);} return {completed:completed.length,week:completed.filter(s=>new Date(s.completedAt)>=weekStart).length,month:completed.filter(s=>{const d=new Date(s.completedAt);return d.getMonth()===month&&d.getFullYear()===year;}).length,streak,seconds:completed.reduce((n,s)=>n+(s.durationSeconds||0),0),exercises:completed.reduce((n,s)=>n+(s.completedExercises?.length||0),0)}; };
+export const exportHistory = sessions => JSON.stringify(sessions,null,2);
