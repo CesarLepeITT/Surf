@@ -27,9 +27,3 @@ node scripts/import-exercises-dataset.mjs /ruta/a/exercises-dataset
 ```
 
 La pantalla **Acerca de** muestra la atribución generada. Hasta realizar la importación, la app usa tarjetas de ejercicio sin animación y lo indica claramente.
-
-## Editar tu plan
-
-En la pestaña **Editar** puedes crear, buscar, editar y eliminar ejercicios; definir nombre alternativo, instrucciones, músculos, equipo y notas; y cargar un GIF/WebP propio. El archivo se convierte a datos locales persistidos dentro de la aplicación, no se conserva una ruta del dispositivo. También puedes crear, duplicar y eliminar rutinas, reordenar ejercicios arrastrando, configurar el modo (repeticiones, por lado, tiempo, distancia o libre), series, descansos y rondas, y asignar las rutinas o un día libre en el calendario semanal.
-
-Las sesiones guardan un *snapshot* de la rutina y de cada ejercicio al iniciarse, de modo que una modificación futura no cambia el historial. Desde Ajustes se puede exportar la configuración completa en JSON o restaurar el plan inicial. Los GIFs personalizados están limitados a 5 MB por las cuotas de almacenamiento habituales del navegador.

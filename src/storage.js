@@ -1,5 +1,5 @@
 const KEY='entrena.local.v1';
-export const defaultState = { sessions:[], configuration:null, preferences:{theme:'system',restBetweenExercises:45,restBetweenRounds:60,stretchSeconds:30,reminders:{enabled:false,time:'19:00',types:{fuerza:true,running:true,piscina:true,movilidad:false}}} };
+export const defaultState = { sessions:[], preferences:{theme:'system',restBetweenExercises:45,restBetweenRounds:60,stretchSeconds:30,reminders:{enabled:false,time:'19:00',types:{fuerza:true,running:true,piscina:true,movilidad:false}}} };
 export const loadState = storage => { try { const saved=JSON.parse(storage.getItem(KEY)); return saved ? {...defaultState,...saved,preferences:{...defaultState.preferences,...saved.preferences}} : structuredClone(defaultState); } catch { return structuredClone(defaultState); } };
 export const saveState = (storage,state) => storage.setItem(KEY,JSON.stringify(state));
 export const addSession = (state,session) => ({...state,sessions:[...state.sessions,session]});
